@@ -1,13 +1,38 @@
-# ASTRO-HEROES IS A TEAM THAT WORKS ON A PROJRCT ABOUT CREATING AN INTEGRATED LAYERED MAP ILLUSTRATING THE THE RELIABLE SAFETY ROUTE ON THE MARTIAN SURFAC FOR THE FIRST ASTRONAUT ON MARS TO CONDUCT MORE SCIENCE ABOUT THE PLANET AND ENHANCE THE FUTUTE MISSIONS OF EXPLORATIONS AND LEAD TO GOOD UNDERSTANDING OF THE SPACE. THE ROUTE IS GENERATED FROM THE COMBINING DIFFERENT OF DATA ON A WAY THAT HELP DETECTING THE HIGH RESOLUTIN AREAS ON MARS, AND FOR THAT THE SCIENTFIC GOAL FOR THE MISSION IS THE EXPLORATION OF EVIDENCE FOR THE LIFE ON MARS, AND THERE THE LAST NASA'S MISSIONS OBSERVED THE REGIONS WHERE HAVE AFFECT OF WATER AND THE MICROBIC LIVES, AND ONE EXAMPLE OF SUCH THAT REGION IS THE GALE CRATER, WHERE OUR MAP HOSTING ON IT.
+# ASTRO-HEROES | Marswalk Mission
+NASA Space Apps Challenge 2026 · Interplanetary Survival Guide: Martian Map · Jazan
 
-The data used for this project:
-- The official NASA-based spatial datasets and authentic digital Elevation Models(DEM) from the curiosity rover's mission across Gale Crater and Mount Sharp, sourced from NASA Mars Trek.
-- AI & Technical Tools. Leveraged AI-assisted programming to write and optimize Python algorithms for geospatial data analysis, Haversine distance calculations, slope matrix computations, and safety parameter filtering.
+An integrated layered map that plans the safest walking route for the first astronauts on Mars, in Gale Crater / Mount Sharp, and re-plans it instantly when a hazard is reported.
 
-  The references:
-  -NASA Mars Science Laboratory(MSL)/ Curiosity Rover Mission Datasets: Waypoint coordinates and mission logs for Mount Sharp ascent in Gale crater
-  - Open-Source Python Libraries:Rasterio, SciPy, NumPy, and pandas
- 
-    The languages used:
-    - Python for running the game or the prototype to start walking.
+- ▶ **Live demo:** https://sattam-al.github.io/marswalk-mission/
+- 💻 **Full code & data:** https://github.com/Sattam-AL/marswalk-mission
+- 📓 **Notebook:** `notebooks/ASTRO_HEROES_Marswalk_DEM_Ready.ipynb`
 
+## How it works
+1. NASA terrain model: MRO CTX stereo DTM (USGS Astrogeology), 20 m/pixel.
+2. Slope and roughness layers → walk-cost map (slopes > 15° are no-go, 20 m safety buffer).
+3. A* search finds the safest route to the science stops.
+4. Reported hazards become no-go zones and the route is re-planned on site; each hazard is saved as a new map layer.
+
+## Repository
+| Folder | Contents |
+|---|---|
+| `notebooks/` | Colab notebook (full pipeline) |
+| `engine/` | Python route engine, API, Colab cells, web game |
+| `data/route_outputs/` | Planned & re-routed routes, obstacles (JSON/GeoJSON) |
+| `images/` | Terrain layers: elevation, slope, roughness, walk cost |
+| `docs/` | NASA sources, project details, AI disclosure |
+| Pitch deck | `Space Apps Pitch Deck` (.pptx) |
+
+## NASA data
+- MRO CTX DTM T01_000815_1749_XN_05S222W__P22_009571_1756_XI_04S222W (USGS Astrogeology STAC)
+- NASA Mars Trek — Gale Crater CTX mosaic
+- NASA MSL Curiosity traverse (MMGIS)
+
+## Tools
+Python (NumPy, SciPy, Rasterio, PyProj, Pandas), Google Colab, FastAPI, JavaScript + Leaflet, GitHub Pages.
+
+## AI disclosure
+AI tools (Claude by Anthropic) assisted in writing the code. All terrain data comes from NASA/USGS sources; all maps were produced by our own code.
+
+## Team
+Musab · Remas · Sattam · Shahad · Yaser · Haya

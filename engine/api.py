@@ -34,7 +34,19 @@ from pydantic import BaseModel
 
 from marswalk_router import MarswalkRouter, RouterConfig
 
-DEM_PATH = os.environ.get("DEM_PATH", "dem_clip.tif")
+HERE = os.path.dirname(os.path.abspath(__file__))
+DEM_PATH = os.environ.get("DEM_PATH", os.path.join(HERE, "dem_clip.tif"))
+
+if not os.path.exists(DEM_PATH) and not DEM_PATH.startswith("http"):
+    # No local DEM: stream the real USGS/NASA CTX DTM (needs internet)
+    import requests
+    _item = requests.post(
+        "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/search",
+        json={"collections": ["mro_ctx_controlled_usgs_dtms"],
+              "ids": ["T01_000815_1749_XN_05S222W__P22_009571_1756_XI_04S222W"], "limit": 1},
+        timeout=60).json()["features"][0]
+    DEM_PATH = _item["assets"]["geoid_adjusted_dem"]["href"]
+    print("Using remote NASA/USGS DTM:", DEM_PATH)
 
 # Mission points (lon, lat) — same as colab_demo.py; change for your site
 HABITAT = (137.44293, -4.58130)
