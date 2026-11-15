@@ -9,5 +9,5 @@ The data used for this project:
   - Open-Source Python Libraries:Rasterio, SciPy, NumPy, and pandas
  
     The languages used:
-    - Python for running the game or the prototype of start walking.
+    - Python for running the game or the prototype to start walking.
 
